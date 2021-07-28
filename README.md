@@ -1,5 +1,5 @@
 # goscan
-Goscan is a fast TCP scanner I created while learning Golang.
+Goscan is a fast TCP scanner I created while learning Golang. I created this project for those times when you need to upload a self contained scanner to a pivot host, because scanning through proxychains is too damn slow!
 
 Usage:
 
