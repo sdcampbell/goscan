@@ -9,11 +9,21 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"strconv"
 )
+
+func makeRange(min, max int) []int {
+    a := make([]int, max-min+1)
+    for i := range a {
+    	a[i] = min + i
+    }
+    return a
+}
 
 func main() {
 	// command line args
-	portPtr := flag.String("ports", "21,22,23,25,53,80,81,88,110,111,123,137,138,139,143,161,389,443,445,500,512,513,548,623,624,1099,1241,1433,1434,1521,2049,2483,2484,3268,3269,3306,3389,4333,4786,4848,5432,5800,5900,5901,5985,5986,6000,6001,7001,8000,8080,8181,8443,10000,16992,16993,27017,32764", "TCP ports to scan, comma separated.")
+	allPortsPtr := flag.Bool("all-ports", false, "Scan all TCP Ports")
+	portPtr := flag.String("ports", "21,22,23,25,53,80,81,88,110,111,123,137,138,139,143,161,389,443,445,500,512,513,548,623,624,1099,1241,1433,1434,1521,2049,2483,2484,3268,3269,3306,3389,4333,4786,4848,5432,5800,5900,5901,5985,5986,6000,6001,7001,8000,8080,8181,8443,10000,16992,16993,27017,32764", "Specify TCP ports to scan, comma separated.")
 	targetPtr := flag.String("target", "scanme.nmap.org", "Target IP address, network address in CIDR format, or hostname")
 	flag.Parse()
 
@@ -22,8 +32,18 @@ func main() {
 	// create a channel to scan 256 concurrent ports
 	ipchan := make(chan string, 256)
 
-	//split portPtr string into a slice of ports
 	tcpports := strings.Split(*portPtr, ",")
+
+	if *allPortsPtr == true {
+		intports := makeRange(1,65535)
+		tcpports = []string{}
+		for i := range intports {
+			number := intports[i]
+			text := strconv.Itoa(number)
+			tcpports = append(tcpports, text)
+		}
+	}
+	
 
 	// If the target is a network address, extract hosts from network and scan,
 	// otherwise send straight to the scanHost func
@@ -80,7 +100,7 @@ func cidrHosts(netw string) []string {
 
 func scanHost(ipchan chan string, wg *sync.WaitGroup) {
 	for i := range ipchan {
-		conn, err := net.DialTimeout("tcp", i, 5*time.Second)
+		conn, err := net.DialTimeout("tcp", i, 1*time.Second)
 		if err != nil {
 			wg.Done()
 			continue
