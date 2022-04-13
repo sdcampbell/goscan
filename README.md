@@ -14,6 +14,16 @@ Usage of goscan:
     	Target IP address, network address in CIDR format, or hostname (default "scanme.nmap.org")
 ```
 
+The output is quiet and easy to grep:
+
+```
+192.168.1.1:80
+192.168.1.1:443
+192.168.1.25:21
+192.168.1.25:445
+192.168.1.25:8080
+```
+
 Time to scan the 55 default ports on a Class C network:
 
 ```
