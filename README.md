@@ -14,7 +14,7 @@ Usage of goscan:
     	Target IP address, network address in CIDR format, or hostname (default "scanme.nmap.org")
 ```
 
-The output is quiet and easy to grep:
+The output is easy to grep (no annoying banners):
 
 ```
 192.168.1.1:80
