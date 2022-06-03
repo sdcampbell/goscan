@@ -7,9 +7,7 @@ For Linux/Mac: `CGO_ENABLED=0 go build goscan.go`
 
 For Windows: `GOOS=windows go build -o goscan.exe goscan.go`
 
-##
-
-Usage:
+## Usage:
 
 ```
 ./goscan -h
