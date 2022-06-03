@@ -1,6 +1,14 @@
 # goscan
 Goscan is a fast TCP scanner I created while learning Golang. I created this project for those times when you need to upload a self contained scanner to a pivot host, because scanning through proxychains is too damn slow!
 
+## Build:
+
+For Linux/Mac: `CGO_ENABLED=0 go build goscan.go`
+
+For Windows: `GOOS=windows go build -o goscan.exe goscan.go`
+
+##
+
 Usage:
 
 ```
