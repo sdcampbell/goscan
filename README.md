@@ -17,7 +17,7 @@ Usage of goscan:
   -ports string
     	Specify TCP ports to scan, comma separated. (default "21,22,23,25,53,80,81,88,110,111,123,137,138,139,143,161,389,443,445,500,512,513,548,623,624,1099,1241,1433,1434,1521,2049,2483,2484,3268,3269,3306,3389,4333,4786,4848,5432,5800,5900,5901,5985,5986,6000,6001,7001,8000,8080,8181,8443,10000,16992,16993,27017,32764")
   -target string
-    	Target IP address, network address in CIDR format, or hostname (default "scanme.nmap.org")
+    	Target IPv4 IP address, IPv4 network address in CIDR format, or hostname (default "scanme.nmap.org")
 ```
 
 The output is easy to grep (no annoying banners):
